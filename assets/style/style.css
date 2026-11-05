@@ -114,20 +114,20 @@ h1 {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 665px;
-  height: 45px;
+  width: 670px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 50px;
-  background: var(--roxo-escuro);
+  background: var(--card);
   border-radius: 40px;
   z-index: 2;
 }
 
 .menu a {
   color: var(--icone-menu);
-  font-size: 1.6rem;
+  font-size: 1.7rem;
   text-decoration: none;
   transition: color 0.2s;
 }
