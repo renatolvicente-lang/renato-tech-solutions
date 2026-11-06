@@ -10,7 +10,12 @@
     --atd-item: #2b2b2b;
     --atd-texto: #f2f2f2;
     --atd-texto-suave: #b5b5b5;
-
+    --sv-card-hover: #323232;
+    --sv-texto: #f2f2f2;
+    --sv-texto-suave: #b8b8b8;
+    --sv-destaque: #6aa7ff; /* azul do teclado da imagem 2 */
+    --sv-fonte-titulo: "Gilda Display", Georgia, serif;
+    --sv-fonte-corpo: "DM Sans", system-ui, sans-serif;
 }
 
 * {
@@ -257,4 +262,149 @@ h1 {
     gap: 0;
     justify-content: space-around;
   }
+}
+/* ---------- serviços ---------- */
+
+
+
+/* manchas de fundo, como na tela original */
+
+
+.sv-painel {
+  max-width: 1000px;
+  margin:80px auto;
+  background: var(--card);
+  border-radius: 28px;
+  padding: 40px 48px 56px;
+}
+
+.sv-topo { text-align: center; margin-bottom: 40px; }
+
+.sv-topo h1 {
+  font-family: var(--sv-fonte-titulo);
+  font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+}
+
+.sv-topo p {
+  max-width: 46ch;
+  margin: 14px auto 0;
+  color: var(--atd-texto-suave);
+  line-height: 1.5;
+}
+
+.sv-lista {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+.sv-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--atd-item);
+  border-radius: 24px;
+  padding: 18px 18px 22px;
+  transition: background 0.2s;
+}
+.sv-card:hover { background: var(--sv-card-hover); }
+
+.sv-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+.sv-card h2 {
+  font-family: var(--sv-fonte-titulo);
+  font-weight: 400;
+  font-size: 1.5rem;
+  margin: 18px 4px 8px;
+}
+
+.sv-card p {
+  color: var(--sv-texto-suave);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0 4px 20px;
+}
+
+.sv-botao {
+  margin-top: auto; /* alinha o botão na base de todos os cards */
+  align-self: flex-start;
+  margin-left: 4px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--sv-destaque);
+  color: var(--sv-destaque);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+.sv-botao:hover { background: var(--sv-destaque); color: var(--sv-painel); }
+
+/* menu inferior */
+.sv-menu {
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--card);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.sv-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  color: var(--sv-texto-suave);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: background 0.2s, color 0.2s;
+}
+
+.sv-menu svg { 
+  width: 22px; 
+  height: 22px; 
+  fill: currentColor; 
+}
+
+/* só a página atual mostra o texto */
+.sv-menu a span { 
+  display: none; 
+}
+.sv-menu a.sv-ativo span { 
+  display: inline; 
+}
+
+.sv-menu a:hover { 
+  color: var(--texto); 
+}
+.sv-menu a.sv-ativo { 
+  background: var(--card); color: var(--texto); 
+}
+
+a:focus-visible { 
+  outline: 2px solid var(--sv-destaque); outline-offset: 3px; 
+}
+
+/* responsivo */
+@media (max-width: 900px) {
+  .sv-lista { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .sv-painel { padding: 32px 20px 40px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
 }
