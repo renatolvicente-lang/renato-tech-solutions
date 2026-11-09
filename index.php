@@ -1,3 +1,13 @@
+<?php
+include "infra/conn.php";
+include "../includes/temp_session.php";
+session_start();
+
+if(!isset($_SESSION["usuario"])){
+  header("Location: public/login.php"); 
+  exit(); 
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
