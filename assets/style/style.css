@@ -339,14 +339,14 @@ h1 {
   margin-left: 4px;
   padding: 10px 20px;
   border-radius: 999px;
-  border: 1px solid var(--sv-destaque);
-  color: var(--sv-destaque);
+  border: 1px solid var(--roxo);
+  color: var(--roxo);
   font-size: 0.9rem;
   font-weight: 500;
   text-decoration: none;
   transition: background 0.2s, color 0.2s;
 }
-.sv-botao:hover { background: var(--sv-destaque); color: var(--sv-painel); }
+.sv-botao:hover { background: var(--roxo); color: var(--sv-painel); }
 
 /* menu inferior */
 .sv-menu {
