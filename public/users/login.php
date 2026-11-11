@@ -1,27 +1,34 @@
 <?php
-include "../infra/conn.php";
+include "../../infra/conn.php";
 
 session_start();
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
+
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ?";
+    
+    $sql = "SELECT * FROM usuarios WHERE email = ?, senha=?";
 
     if($stmt = $conn -> prepare($sql)){
-        $stmt -> bind_param("s", $email);
 
+        $stmt -> bind_param("ss", $email, $senha);
         $stmt->execute();
         $result = $stmt->get_result();
 
         if($result->num_rows > 0){
+
             $usuario = $result->fetch_assoc();
+
+            echo "<script> alert('Login bem sucedido')</script>";
 
             $_SESSION["usuario"] = $usuario["nome"];
 
-            header("Location: ../index.php");
+            header("Location: ../../index.php");
             exit();
+        }else{
+            echo "<script> alert('Não foi possivel logar')</script>";
         }
     }
 }
@@ -43,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
   <!-- Ícones (Font Awesome) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-  <link rel="stylesheet" href="../assets/style/style.css">
+  <link rel="stylesheet" href="../../assets/style/style.css">
 </head>
 <body>
     <span class="blob blob-tl"></span>
@@ -69,7 +76,11 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     <br>
                     <div class="content_login">
                         <label for="senha">Senha:</label><br>
-                        <input type="password" name="senha" id="senha">
+                        <input type="password" name="senha" id="senha" required>
+                    </div>
+                    <br>
+                    <div class="content_login">
+                        <p>Caso você não tenha conta <a href="cadastro.php" class="destaque">clique aqui</a> para se cadastrar</p>
                     </div>
                     <br>
                     <div class="content_login">

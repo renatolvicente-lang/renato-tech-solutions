@@ -7,12 +7,12 @@ session_start();
 $temp_session = time();
 
 if(!isset($_SESSION["usuario"])){
-  header("Location: public/login.php"); 
+  header("Location: public/users/login.php"); 
   exit(); 
 }
 if((time()-$temp_session) > 900){
     session_destroy();
-    header("Location: public/login.php");
+    header("Location: public/users/login.php");
     exit();
 }
 ?>
