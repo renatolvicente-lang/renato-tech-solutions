@@ -19,7 +19,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
             $usuario = $result->fetch_assoc();
 
             $_SESSION["usuario"] = $usuario["nome"];
-            $_SESSION["cargo"] = $usuario["cargo"];
 
             header("Location: ../index.php");
             exit();
