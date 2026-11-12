@@ -9,7 +9,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $senha = $_POST["senha"];
 
     
-    $sql = "SELECT * FROM usuarios WHERE email = ?, senha=?";
+    $sql = "SELECT * FROM usuarios WHERE email = ? and senha=?";
 
     if($stmt = $conn -> prepare($sql)){
 
