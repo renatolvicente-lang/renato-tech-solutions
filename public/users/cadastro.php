@@ -66,10 +66,18 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         <div class="ttl_login">
             <h1>Renato <span class="destaque">Tech Solutions</span></h1>
         </div>
-        <div class="card_login">
+        <div class="card_cad">
             <div class="fm_login">
                 <div>
-                    <h1>Cadastro</h1>
+                    <h1>
+                        <?php
+                            if($id){
+                                echo ("Atualizar");
+                            }else{
+                                echo ("Cadastrar");
+                            }
+                        ?>
+                    </h1>       
                 </div>
                 <form action="" method="POST">
                     <div class="content_login">
