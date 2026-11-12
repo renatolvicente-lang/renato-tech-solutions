@@ -10,11 +10,23 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
+
+    //if(empty($email)){
+      //  $erro = "O campo de email não pode estar vázio";
+    //}elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+     //   $erro = "Campo email está preenchido incorretamente";
+    //}elseif(strpos($email, " ") === true){
+     //   $erro = "Seu email não pode conter espaços";
+    //}
+
+
+    $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
     if($id){ 
         $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
         
         if($stmt = $conn -> prepare($sql)){
-            $stmt -> bind_param("sssi", $nome, $email, $senha, $id);
+            $stmt -> bind_param("sssi", $nome, $email, $senhaHash, $id);
         }else{
             echo "Não foi possivel Atualizar";
         }
@@ -22,7 +34,7 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $sql = "INSERT INTO usuarios(nome, email, senha) VALUES (?,?,?)";
         
         if($stmt = $conn -> prepare($sql)){
-        $stmt -> bind_param("sss", $nome, $email, $senha);
+        $stmt -> bind_param("sss", $nome, $email, $senhaHash);
 
         $stmt->execute();
 
@@ -72,9 +84,9 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     <h1>
                         <?php
                             if($id){
-                                echo ("Atualizar");
+                                echo "Atualizar";
                             }else{
-                                echo ("Cadastrar");
+                                echo "Cadastrar";
                             }
                         ?>
                     </h1>       

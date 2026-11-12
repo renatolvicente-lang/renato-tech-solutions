@@ -18,13 +18,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $result = $stmt->get_result();
 
         if($result->num_rows > 0){
-            
             $usuario = $result->fetch_assoc();
             
-            $_SESSION["usuario"] = $usuario["id"];
+            if(password_verify($senha, $usuario["senha"])){
+                $_SESSION["id"] = $usuario["id"];
+                $_SESSION["usuario"] = $usuario["nome"];
 
-            header("Location: ../../index.php");
-            exit();
+                header("Location: ../../index.php");
+                exit();
+            }
         }
     }
 }
