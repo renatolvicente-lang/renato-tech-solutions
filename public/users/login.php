@@ -18,17 +18,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
         $result = $stmt->get_result();
 
         if($result->num_rows > 0){
-
+            
             $usuario = $result->fetch_assoc();
-
-            echo "<script> alert('Login bem sucedido')</script>";
-
-            $_SESSION["usuario"] = $usuario["nome"];
+            
+            $_SESSION["usuario"] = $usuario["id"];
 
             header("Location: ../../index.php");
             exit();
-        }else{
-            echo "<script> alert('Não foi possivel logar')</script>";
         }
     }
 }
