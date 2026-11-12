@@ -1,5 +1,5 @@
 CREATE DATABASE rtsolution;
-use rtsolution
+use rtsolution;
 
 CREATE TABLE usuarios(
     id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
