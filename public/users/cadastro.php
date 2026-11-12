@@ -3,27 +3,39 @@ include "../../infra/conn.php";
 
 session_start();
 
+$id = $_GET["id"];
+
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     $nome = $_POST["nome"];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
 
-    $sql = "SELECT * FROM usuarios WHERE email = ?";
-
-    if($stmt = $conn -> prepare($sql)){
-        $stmt -> bind_param("s", $email);
+    if($id){ 
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ? WHERE id = ?";
+        
+        if($stmt = $conn -> prepare($sql)){
+            $stmt -> bind_param("sssi", $nome, $email, $senha, $id);
+        }else{
+            echo "Não foi possivel Atualizar";
+        }
+    }else{
+        $sql = "INSERT INTO usuarios(nome, email, senha) VALUES (?,?,?)";
+        
+        if($stmt = $conn -> prepare($sql)){
+        $stmt -> bind_param("sss", $nome, $email, $senha);
 
         $stmt->execute();
-        $result = $stmt->get_result();
 
-        if($result->num_rows > 0){
-
-            header("Location: ../../index.php");
-            exit();
+        header("Location: ../../index.php");
+        exit();
+    
         }else{
-            echo "<script> alert('Não foi possivel logar')</script>";
+            echo "Não foi possivel Cadastrar";
         }
     }
+
+
+    
 }
 ?>
 <!DOCTYPE html>
@@ -80,7 +92,13 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                     </div>
                     <br>
                     <div class="content_login">
-                        <button type="submit" class="btn_login">Logar</button>
+                        <button type="submit" class="btn_login"><?php
+                            if($id){
+                                echo "Atualizar";
+                            }else{
+                                echo "Cadastrar";
+                            }
+                        ?></button>
                     </div>
                 </form>
             </div>
