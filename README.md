@@ -1,6 +1,6 @@
-
-# Renato Tech Solutions
-
+<h1 align="center">
+ Renato Tech Solutions
+</h1>
 <p align="center">
   <strong>Tecnologia em boas mãos. Seu equipamento no máximo desempenho.</strong>
 </p>
